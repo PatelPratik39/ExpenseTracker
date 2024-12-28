@@ -4,6 +4,7 @@ from expense import Expense
 def main():
     print(f" 🎯 Running the Expense Tracker App !!")
     expense_file_path = "expense.csv"
+    budget = 2000
     
     # Get user input for expense
     expense = get_user_expense()
@@ -13,7 +14,7 @@ def main():
     # save_expense_to_file(expense,expense_file_path)
     
     # Read File and summerize expenses.
-    summerize_expense(expense_file_path)
+    summerize_expense(expense_file_path, budget)
 
 def get_user_expense():
     print(f"Getting User Expenses ")
@@ -46,7 +47,7 @@ def save_expense_to_file(expense: Expense, expense_file_path):
         f.write(f"{expense.name.strip()}, {expense.amount:.2f}, {expense.category.strip()}\n")
     
 
-def summerize_expense(expense_file_path):
+def summerize_expense(expense_file_path, budget):
     print(f"🎯 Summerizing User Expenses : ")
     expenses: list[Expense] = []
     
@@ -71,6 +72,12 @@ def summerize_expense(expense_file_path):
     print("Expenses By Category : ")
     for key, amount in amount_by_category.items():
         print(f"    {key}: ${amount:.2f}")
+        
+    total_spent = sum([ex.amount for ex in expenses])
+    print(f"💵 You have spent ${total_spent:.2f} this month! ")
+    
+    remaining_budget = budget - total_spent
+    print(f"📈 Your Remaining Budget ${remaining_budget:.2f} this month! ")
 
 if __name__ == "__main__":
     main()
