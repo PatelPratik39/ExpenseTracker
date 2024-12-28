@@ -2,20 +2,21 @@ from expense import Expense
 
 
 def main():
-    print(f" 🎯 Running the App")
+    print(f" 🎯 Running the Expense Tracker App !!")
+    expense_file_path = "expense.csv"
     
     # Get user input for expense
     expense = get_user_expense()
     print(expense)
     
     # Write their expense to a file
-    save_expense_to_file()
+    save_expense_to_file(expense,expense_file_path)
     
     # Read File and summerize expenses.
-    summerize_expense()
+    summerize_expense(expense_file_path)
 
 def get_user_expense():
-    print(f" Getting User Expenses ")
+    print(f"Getting User Expenses ")
     expense_name = input("Enter Expense Name : ")
     expense_amount = float(input("Enter Expense Amount : "))
     # print(f"You have entered {expense_name}, {expense_amount}")
@@ -39,12 +40,21 @@ def get_user_expense():
                 print("Invalid category. Please try again!")
         break
 
-def save_expense_to_file():
-    print(f" Saving User Expenses ")
+def save_expense_to_file(expense: Expense, expense_file_path):
+    print(f" Saving User Expenses : {expense} to {expense_file_path}")
+    with open(expense_file_path, "a") as f:
+        f.write(f"{expense.name}, {expense.amount:.2f}, {expense.category}\n")
     
 
-def summerize_expense():
-    print(f" Summerizing User Expenses ")
+def summerize_expense(expense_file_path):
+    print(f"🎯 Summerizing User Expenses ")
+    expenses = []
+    with open(expense_file_path, "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            # stripped_line = line.strip()
+            expense_name, expense_amount, expense_category = line.strip().split(", ")
+            print(expense_name,expense_amount, expense_category)
     
 
 if __name__ == "__main__":
