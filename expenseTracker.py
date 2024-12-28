@@ -12,7 +12,7 @@ def main():
     print(expense)
     
     # Write their expense to a file
-    # save_expense_to_file(expense,expense_file_path)
+    save_expense_to_file(expense,expense_file_path)
     
     # Read File and summerize expenses.
     summerize_expense(expense_file_path, budget)
