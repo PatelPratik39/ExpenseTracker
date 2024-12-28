@@ -92,6 +92,8 @@ def summerize_expense(expense_file_path, budget):
     daily_budget = remaining_budget / remaining_days
     print(f"👉🏻 Budget per day :  ${daily_budget:.2f}")
 
+    
+
 if __name__ == "__main__":
     main()
 
