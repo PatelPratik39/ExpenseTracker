@@ -1,5 +1,6 @@
 from expense import Expense
-
+import datetime
+import calendar
 
 def main():
     print(f" 🎯 Running the Expense Tracker App !!")
@@ -55,7 +56,7 @@ def summerize_expense(expense_file_path, budget):
         lines = f.readlines()
         for line in lines:
             expense_name, expense_amount, expense_category = map(str.strip, line.strip().split(","))
-            print(expense_name, expense_amount, expense_category)
+            # print(expense_name, expense_amount, expense_category)
             line_expense = Expense(name = expense_name, amount = float(expense_amount), category = expense_category)
             expenses.append(line_expense)
     
@@ -78,6 +79,18 @@ def summerize_expense(expense_file_path, budget):
     
     remaining_budget = budget - total_spent
     print(f"📈 Your Remaining Budget ${remaining_budget:.2f} this month! ")
+    
+    # Get the current date
+    today = datetime.date.today()
+    # Get the last day of the current month
+    last_day_of_month = calendar.monthrange(today.year, today.month)[1]
+    # Calculate the remaining days
+    remaining_days = last_day_of_month - today.day
+
+    # print(f"Remaining days in the current month: {remaining_days}")
+    
+    daily_budget = remaining_budget / remaining_days
+    print(f"👉🏻 Budget per day :  ${daily_budget:.2f}")
 
 if __name__ == "__main__":
     main()
