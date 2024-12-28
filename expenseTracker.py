@@ -10,7 +10,7 @@ def main():
     print(expense)
     
     # Write their expense to a file
-    save_expense_to_file(expense,expense_file_path)
+    # save_expense_to_file(expense,expense_file_path)
     
     # Read File and summerize expenses.
     summerize_expense(expense_file_path)
@@ -47,15 +47,17 @@ def save_expense_to_file(expense: Expense, expense_file_path):
     
 
 def summerize_expense(expense_file_path):
-    print(f"🎯 Summerizing User Expenses ")
+    print(f"🎯 Summerizing User Expenses : ")
     expenses = []
     with open(expense_file_path, "r") as f:
         lines = f.readlines()
         for line in lines:
-            # stripped_line = line.strip()
             expense_name, expense_amount, expense_category = line.strip().split(", ")
-            print(expense_name,expense_amount, expense_category)
-    
+            print(expense_name, expense_amount, expense_category)
+            line_expense = Expense(name=expense_name, amount=expense_amount, category=expense_category)
+            print(line_expense)
+            expenses.append(line_expense)
+    print(expenses)
 
 if __name__ == "__main__":
     main()
